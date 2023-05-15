@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  rewrites: async () => [
+    {
+      source: "/docente",
+      destination: "/pages/Teacher",
+    },
+  ],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
