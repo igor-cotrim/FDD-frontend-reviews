@@ -3,7 +3,15 @@ const nextConfig = {
   rewrites: async () => [
     {
       source: "/docente",
-      destination: "/pages/Teacher",
+      destination: "/pages/teacher",
+    },
+    {
+      source: "/docente/:semestre",
+      destination: "/pages/teacher/[semester]",
+    },
+    {
+      source: "/docente/:semestre/:disciplina",
+      destination: "/pages/teacher/[semester]/[discipline]",
     },
   ],
 };

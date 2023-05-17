@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 export const Data = () => ({
@@ -65,11 +66,13 @@ export const Data = () => ({
 });
 
 export const Actions = () => {
+  const router = useRouter();
+
   const editAction = (row: any) => (
     <PencilSquareIcon
       className="p-2 rounded-lg cursor-pointer text-primary w-9 h-9"
       title="Editar"
-      onClick={() => console.log(row)}
+      onClick={() => router.push(`/docente/${row.original.semester}`)}
     />
   );
 
