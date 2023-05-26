@@ -13,6 +13,10 @@ const nextConfig = {
       source: "/docente/:semestre/:disciplina",
       destination: "/pages/teacher/[semester]/[discipline]",
     },
+    {
+      source: "/coordenador",
+      destination: "/pages/coordinator",
+    },
   ],
 };
 
