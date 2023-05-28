@@ -33,9 +33,19 @@ const Teacher = () => {
 
       {isModalOpen && (
         <Modal
-          className="max-w-xs"
           isOpen={isModalOpen}
           setIsOpen={setIsModalOpen}
+          titleModal="Cadastrar Discente"
+          fields={[
+            { keyName: 'name', placeholderInput: "Nome" },
+            { keyName: 'registrationNumber', placeholderInput: "Número de Matrícula" },
+          ]}
+          buttonSubmit={{
+            label: "Cadastrar",
+            onDidDismiss: (data) => {
+              console.log("data: ",data);
+            },
+          }}
         />
       )}
     </div>
