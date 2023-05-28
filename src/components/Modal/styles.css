@@ -36,10 +36,11 @@ input {
 }
 
 .DialogTitle {
-  margin: 0;
   font-weight: 500;
   color: var(--mauve12);
   font-size: 17px;
+  margin: 0 10px 28px 0;
+  text-align: center;
 }
 
 .DialogDescription {

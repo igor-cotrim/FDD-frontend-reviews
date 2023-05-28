@@ -1,41 +1,88 @@
-import React from 'react';
-import * as Dialog from '@radix-ui/react-dialog';
+import React, { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-import './styles.css';
+import "./styles.css";
 
 type PropsModal = {
-  isOpen: boolean
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  titleModal: string;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   className?: string;
+  fields: Field[];
+  buttonSubmit: ButtonSubmit;
 };
 
-const DialogDemo = ({ isOpen, setIsOpen }: PropsModal) => (
-  <Dialog.Root defaultOpen open={isOpen} >
+type Field = {
+  keyName: string
+  label?: string;
+  placeholderInput: string;
+};
+
+type ButtonSubmit = {
+  label: string;
+  onDidDismiss: (arg: any) => void;
+};
+
+const Modal = ({
+  isOpen,
+  setIsOpen,
+  titleModal,
+  fields,
+  buttonSubmit,
+}: PropsModal) => {
+  const [valueField, setValueField] = useState({} as any)
+
+  function updateFieldValue(keyName: string, arg: React.ChangeEvent<HTMLInputElement>) {
+    const value = arg.target.value
+    setValueField((oldValue: any) => ({
+      ...oldValue,
+      [keyName]: value
+    }))
+  }
+
+  function submit() {
+    buttonSubmit.onDidDismiss(valueField)
+    setIsOpen(false)
+  }
+  
+  return (
+    <Dialog.Root defaultOpen open={isOpen}>
     <Dialog.Portal>
       <Dialog.Overlay className="DialogOverlay" />
       <Dialog.Content className="DialogContent">
-        <Dialog.Title className="DialogTitle">Edit profile</Dialog.Title>
-        <Dialog.Description className="DialogDescription">
-          Make changes to your profile here. Click save when you re done.
-        </Dialog.Description>
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="name">
-            Name
-          </label>
-          <input className="Input" id="name" defaultValue="Pedro Duarte" />
-        </fieldset>
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="username">
-            Username
-          </label>
-          <input className="Input" id="username" defaultValue="@peduarte" />
-        </fieldset>
-        <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
+        <Dialog.Title className="DialogTitle">{titleModal}</Dialog.Title>
+        {fields.map((field, index) => (
+          <fieldset key={index} className="Fieldset">
+            {field?.label && (
+              <label className="Label" htmlFor="name">
+                {field.label}
+              </label>
+            )}
+
+            <input
+              className="Input"
+              id="name"
+              placeholder={field.placeholderInput}
+              defaultValue=""
+              onChange={(e) => updateFieldValue(field.keyName, e)}
+            />
+          </fieldset>
+        ))}
+
+        <div
+          style={{ display: "flex", marginTop: 25, justifyContent: "center" }}
+        >
           <Dialog.Close asChild>
-            <button className="Button green">Save changes</button>
+            <button
+              className="Button green"
+              onClick={() => submit()}
+            >
+              {buttonSubmit.label}
+            </button>
           </Dialog.Close>
         </div>
+
         <Dialog.Close asChild onClick={() => setIsOpen(false)}>
           <button className="IconButton" aria-label="Close">
             <XMarkIcon />
@@ -44,6 +91,7 @@ const DialogDemo = ({ isOpen, setIsOpen }: PropsModal) => (
       </Dialog.Content>
     </Dialog.Portal>
   </Dialog.Root>
-);
+  )
+}
 
-export default DialogDemo;
+export default Modal;
