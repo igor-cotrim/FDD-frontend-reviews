@@ -1,5 +1,4 @@
 import {
-  ChangeEventHandler,
   HTMLInputTypeAttribute,
   InputHTMLAttributes,
 } from "react";
@@ -11,7 +10,6 @@ type InputProps = {
   name: string;
   placeholder?: string;
   value?: string | number | Date;
-  onChange?: ChangeEventHandler | undefined;
   type: HTMLInputTypeAttribute;
 } & InputTypes;
 
