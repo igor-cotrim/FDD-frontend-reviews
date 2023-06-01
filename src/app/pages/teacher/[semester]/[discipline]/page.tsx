@@ -22,7 +22,7 @@ const Discipline = () => {
           Programação para Web - 2022.2
         </h1>
         <Button type="button" className="max-w-xs">
-          <PlusIcon className="absolute w-6 h-6" />
+          <PlusIcon className="w-6 h-6" />
           Adicionar discente
         </Button>
       </div>
