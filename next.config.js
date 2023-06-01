@@ -17,6 +17,14 @@ const nextConfig = {
       source: "/coordenador",
       destination: "/pages/coordinator",
     },
+    {
+      source: "/coordenador/formulario",
+      destination: "/pages/coordinator/form",
+    },
+    {
+      source: "/coordenador/formulario/:id",
+      destination: "/pages/coordinator/form/[id]",
+    },
   ],
 };
 
