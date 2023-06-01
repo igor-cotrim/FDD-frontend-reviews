@@ -39,13 +39,18 @@ export const Data = () => ({
   ],
 });
 
-export const Actions = () => {
-  const router = useRouter();
+type ActionProps = {
+  onEdit?: (row: any) => void;
+  onDelete?: (row: any) => void;
+  onCopy?: (row: any) => void;
+}
 
+export const Actions = (props: ActionProps) => {
   const editAction = (row: any) => (
     <PencilSquareIcon
       className="p-2 rounded-lg cursor-pointer text-primary w-9 h-9"
       title="Editar"
+      onClick={props.onEdit}
     />
   );
 
