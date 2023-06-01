@@ -21,7 +21,7 @@ const Teacher = () => {
           type="button"
           className="max-w-xs"
         >
-          <PlusIcon className="absolute w-6 h-6" />
+          <PlusIcon className="w-6 h-6" />
           Adicionar semestre
         </Button>
       </div>
@@ -43,7 +43,7 @@ const Teacher = () => {
           buttonSubmit={{
             label: "Cadastrar",
             onDidDismiss: (data) => {
-              console.log("data: ",data);
+              console.log("data: ", data);
             },
           }}
         />

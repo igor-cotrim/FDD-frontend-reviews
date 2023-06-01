@@ -19,7 +19,7 @@ const Button = ({
   <button
     type={type}
     onClick={onClick}
-    className={`w-full px-4 py-2 mt-2 text-base font-medium text-white bg-primary border border-transparent rounded-md shadow-sm disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-red-950 focus:ring-red-500 ${className}`}
+    className={`flex gap-1 w-full px-4 py-2 mt-2 text-base font-medium text-white bg-primary border border-transparent rounded-md shadow-sm disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-red-950 focus:ring-red-500 ${className}`}
     {...props}
   >
     {children}
