@@ -4,41 +4,10 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 
+import { students } from "@/mocks";
+
 export const Data = () => ({
-  data: [
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-  ],
+  data: students,
   columns: [
     {
       Header: "Nome",
