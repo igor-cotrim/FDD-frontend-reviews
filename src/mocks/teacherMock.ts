@@ -2,7 +2,7 @@ import {
   teacherDisciplineModel,
   teacherSemesterModel,
   teacherStudentModel,
-} from "@/app/models";
+} from "@/models";
 
 export const semesters: teacherSemesterModel[] = [
   {
