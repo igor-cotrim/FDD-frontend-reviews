@@ -32,12 +32,12 @@ const Input = ({
       >
         {label}
       </label>
-      <div className="mt-1 mb-1">
+      <div className="w-full mt-1 mb-1 border border-gray-200 rounded-md shadow-sm">
         <input
           type={type}
           name={name}
           id={name}
-          className="block w-full p-2 border border-gray-400 rounded-md shadow-sm sm:text-sm disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-50"
+          className="block w-full p-2 sm:text-sm disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-50"
           placeholder={placeholder}
           value={value}
           onChange={onChange}
