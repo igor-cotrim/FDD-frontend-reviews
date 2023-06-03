@@ -7,55 +7,24 @@ import {
 import { useRouter } from "next/navigation";
 
 export const Data = () => ({
-  data: [
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-    {
-      name: "Fulano da Silva",
-      code: "2018219000",
-    },
-  ],
   columns: [
+    {
+      Header: "Id",
+      accessor: "id"
+    },
     {
       Header: "Nome",
       accessor: "name",
     },
     {
       Header: "Numero de matrícula",
-      accessor: "code",
+      accessor: "registrationNumber",
     },
   ],
 });
 
 export const Actions = () => {
   const router = useRouter();
-  
   const viewAction = (row: any) => (
     <EyeIcon
       className="p-2 text-blue-600 rounded-lg cursor-pointer w-9 h-9"
@@ -74,7 +43,7 @@ export const Actions = () => {
     <TrashIcon
       className="p-2 text-red-600 rounded-lg cursor-pointer w-9 h-9"
       title="Deletar"
-      onClick={() => console.log(row)}
+      onClick={() => {}}
     />
   );
 

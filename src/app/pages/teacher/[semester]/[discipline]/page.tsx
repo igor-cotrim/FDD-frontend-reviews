@@ -1,15 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
-
-import { Button, Table } from "@/components";
-
+import { Button, Modal, Table } from "@/components";
 import * as D from "./data";
+import { DiscenteList } from "@/types/DiscenteList";
 
 const Discipline = () => {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [data, setData] = useState<DiscenteList>([{ name: "", registrationNumber: "" }]);
+
+  const saveData = async (data: any) => {
+    await fetch("http://localhost:8080/discentes", {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    })
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:8080/discentes")
+      const discentes = await res.json()
+      setData(discentes)
+    }
+    fetchData()
+  }, [saveData])
+
 
   return (
     <div className="pt-12">
@@ -21,16 +40,33 @@ const Discipline = () => {
           <ArrowLeftIcon className="w-6 h-6 mr-3" />
           Programação para Web - 2022.2
         </h1>
-        <Button type="button" className="max-w-xs">
+        <Button type="button" className="max-w-xs" onClick={() => setIsModalOpen(true)}>
           <PlusIcon className="absolute w-6 h-6" />
           Adicionar discente
         </Button>
       </div>
       <Table
         columns={D.Data().columns}
-        data={D.Data().data}
+        data={data}
         actions={D.Actions()}
       />
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          titleModal="Cadastrar Discente"
+          fields={[
+            { keyName: 'name', placeholderInput: "Nome" },
+            { keyName: 'registrationNumber', placeholderInput: "Número de Matrícula" },
+          ]}
+          buttonSubmit={{
+            label: "Cadastrar",
+            onDidDismiss: async (data) => {
+              saveData(data)
+            },
+          }}
+        />
+      )}
     </div>
   );
 };

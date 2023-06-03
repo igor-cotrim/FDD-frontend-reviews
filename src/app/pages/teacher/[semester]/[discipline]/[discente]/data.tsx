@@ -6,40 +6,6 @@ import {
   import { useRouter } from "next/navigation";
   
   export const Data = () => ({
-    data: [
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-      {
-        name: "Fulano da Silva",
-        code: "2018219000",
-      },
-    ],
     columns: [
       {
         Header: "Nome",

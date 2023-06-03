@@ -27,7 +27,7 @@ const Discente = () => {
       </div>
       <Table
         columns={D.Data().columns}
-        data={D.Data().data}
+        data={[{}]}
       />
     </div>
   );

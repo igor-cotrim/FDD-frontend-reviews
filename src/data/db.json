@@ -1,10 +1,19 @@
 {
-    "discentes":
-    [
-        {
-            "id": 1,
-            "name": "Pedro Henrique",
-            "matricula": "202011190032"
-        }
-    ]
+  "discentes": [
+    {
+      "name": "Pedro Henrique",
+      "registrationNumber": "202011190032",
+      "id": 1
+    },
+    {
+      "name": "Pedro ",
+      "registrationNumber": "4286234523",
+      "id": 2
+    },
+    {
+      "name": "Teste",
+      "registrationNumber": "123123123142",
+      "id": 3
+    }
+  ]
 }
