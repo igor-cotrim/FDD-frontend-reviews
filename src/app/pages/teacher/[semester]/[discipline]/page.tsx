@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 import { useModalStore, useTeacherStore } from "@/store";
-import { Button, Modal, Table } from "@/components";
+import { Button, Table, ModalDelete, ModalForm } from "@/components";
 
 import * as D from "./data";
 
@@ -29,7 +29,7 @@ const Discipline = () => {
         </h1>
         <Button
           type="button"
-          className="max-w-[12rem]"
+          className="max-w-[12rem] p-2"
           onClick={() => {
             toggleVisibility(true, "form");
           }}
@@ -45,73 +45,32 @@ const Discipline = () => {
       />
 
       {modalType === "form" && (
-        <Modal
-          titleModal="Cadastrar Discente"
+        <ModalForm
+          onSubmit={() => ({})}
+          title="Cadastrar Discente"
           fields={[
-            { keyName: "name", placeholderInput: "Nome" },
-            {
-              keyName: "registrationNumber",
-              placeholderInput: "Número de Matrícula",
-            },
-          ]}
-          buttons={[
-            {
-              label: "Fechar",
-              type: "close",
-            },
-            {
-              label: "Cadastrar",
-              type: "submit",
-              onDidDismiss: async (data) => {
-                // saveData(data);
-              },
-            },
+            { label: "Nome", name: "name", type: "text" },
+            { label: "Matrícula", name: "registrationNumber", type: "number" },
           ]}
         />
       )}
 
       {modalType === "edit" && (
-        <Modal
-          titleModal="Editar Discente"
+        <ModalForm
+          onSubmit={() => ({})}
+          title="Editar Discente"
           fields={[
-            { keyName: "name", placeholderInput: "Nome" },
-            {
-              keyName: "registrationNumber",
-              placeholderInput: "Número de Matrícula",
-            },
-          ]}
-          buttons={[
-            {
-              label: "Fechar",
-              type: "close",
-            },
-            {
-              label: "Editar",
-              type: "submit",
-              onDidDismiss: async (data) => {
-                // saveData(data);
-              },
-            },
+            { label: "Nome", name: "name", type: "text" },
+            { label: "Matrícula", name: "registrationNumber", type: "number" },
           ]}
         />
       )}
 
       {modalType === "delete" && (
-        <Modal
-          titleModal="Deseja realmente deletar o Discente?"
-          buttons={[
-            {
-              label: "Não",
-              type: "close",
-            },
-            {
-              label: "Sim",
-              type: "submit",
-              onDidDismiss: async (data) => {
-                // saveData(data);
-              },
-            },
-          ]}
+        <ModalDelete
+          title="Deseja realmente deletar o Discente?"
+          description="Ao fazer isso o discente será deletado. Tem certeza que deseja deleta-lo?"
+          action={() => ({})}
         />
       )}
     </div>

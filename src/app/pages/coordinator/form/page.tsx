@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Input, Modal, Table } from "@/components";
+import { Button, Input, ModalForm, Table } from "@/components";
 import { useModalStore } from "@/store";
 import * as D from "./data";
 
 const CoordinatorForm = () => {
-  const { toggleVisibility } = useModalStore()
-  const data = D.Data()
-  const [form, setForm] = useState(data.data)
-  const [question, setQuestion] = useState<string>('')
+  const { toggleVisibility, modalType } = useModalStore();
+  const data = D.Data();
+  const [form, setForm] = useState(data.data);
+  const [question, setQuestion] = useState<string>("");
 
   return (
     <div className="pt-12">
@@ -20,33 +20,43 @@ const CoordinatorForm = () => {
         Qual pergunta deseja cadastrar no formulário?
       </h2>
       <div className="flex items-center justify-between mb-4">
-        <Input label="" value={question} name="question" type="text" onChange={event => setQuestion(event.target.value)} className="h-9 bg-white" />
-        <Button onClick={() => {
-          if (question) {
-            setForm(oldValue => ({
-              title: oldValue.title,
-              questions: [...oldValue.questions, { title: question }]
-            }))
-            setQuestion('')
-          }
-        }} type="button" className="max-w-xs flex">
+        <Input
+          label=""
+          value={question}
+          name="question"
+          type="text"
+          onChange={(event) => setQuestion(event.target.value)}
+          className="bg-white h-9"
+        />
+        <Button
+          onClick={() => {
+            if (question) {
+              setForm((oldValue) => ({
+                title: oldValue.title,
+                questions: [...oldValue.questions, { title: question }],
+              }));
+              setQuestion("");
+            }
+          }}
+          type="button"
+          className="max-w-xs p-2"
+        >
           Cadastrar
         </Button>
       </div>
       <Table
         columns={data.columns}
         data={form.questions}
-        actions={D.Actions({ onEdit: toggleVisibility })}
+        actions={D.Actions({ onEdit: () => toggleVisibility(true, "edit") })}
       />
-      <Modal
-        buttons={[{
-          label: "Atualizar",
-          type: "submit",
-          onDidDismiss: (data) => console.log("data: ", data)
-        }]}
-        fields={[{ keyName: 'question', placeholderInput: "Pergunta" }]}
-        titleModal="Atualizar pergunta"
-      />
+
+      {modalType === "edit" && (
+        <ModalForm
+          onSubmit={() => ({})}
+          title="Editar Pergunta"
+          fields={[{ label: "Pergunta", name: "question", type: "text" }]}
+        />
+      )}
     </div>
   );
 };

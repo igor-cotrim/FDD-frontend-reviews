@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 
 import { Button, Table } from "@/components";
@@ -9,7 +9,7 @@ import { Button, Table } from "@/components";
 import * as D from "./data";
 
 const Coordinator = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <div className="pt-12">
@@ -17,7 +17,11 @@ const Coordinator = () => {
         <h1 className="font-mono text-3xl font-semibold text-primary">
           Formulários
         </h1>
-        <Button onClick={() => router.push('/coordenador/formulario')} type="button" className="max-w-xs flex">
+        <Button
+          onClick={() => router.push("/coordenador/formulario")}
+          type="button"
+          className="max-w-xs p-2 "
+        >
           <PlusIcon className="w-6 h-6" />
           Adicionar formulário
         </Button>
@@ -25,7 +29,10 @@ const Coordinator = () => {
       <Table
         columns={D.Data().columns}
         data={D.Data().data}
-        actions={D.Actions({ onEdit: (params) => router.push(`/coordenador/formulario/${params.id}`) })}
+        actions={D.Actions({
+          onEdit: (params) =>
+            router.push(`/coordenador/formulario/${params.id}`),
+        })}
       />
     </div>
   );
