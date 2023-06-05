@@ -5,35 +5,35 @@ import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 import { useTeacherStore } from "@/store";
-import { Button, Table } from "@/components";
-
 import { Button, Modal, Table } from "@/components";
-import * as D from "./data";
 import { DiscenteList } from "@/types/DiscenteList";
+
+import * as D from "./data";
 
 const Discipline = () => {
   const router = useRouter();
   const { discipline, setDiscipline } = useTeacherStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [data, setData] = useState<DiscenteList>([{ name: "", registrationNumber: "" }]);
+  const [data, setData] = useState<DiscenteList>([
+    { name: "", registrationNumber: "" },
+  ]);
 
   const saveData = async (data: any) => {
     await fetch("http://localhost:8080/discentes", {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
-    })
-  }
+      headers: { "Content-Type": "application/json" },
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:8080/discentes")
-      const discentes = await res.json()
-      setData(discentes)
-    }
-    fetchData()
-  }, [saveData])
-
+      const res = await fetch("http://localhost:8080/discentes");
+      const discentes = await res.json();
+      setData(discentes);
+    };
+    fetchData();
+  }, [saveData]);
 
   return (
     <div className="pt-12">
@@ -48,31 +48,32 @@ const Discipline = () => {
           <ArrowLeftIcon className="w-6 h-6 mr-3" />
           {discipline}
         </h1>
-        <Button type="button" className="max-w-[12rem]">
-          <PlusIcon className="w-6 h-6" />
-        <Button type="button" className="max-w-xs" onClick={() => setIsModalOpen(true)}>
+        <Button
+          type="button"
+          className="max-w-[12rem]"
+          onClick={() => setIsModalOpen(true)}
+        >
           <PlusIcon className="absolute w-6 h-6" />
           Adicionar discente
         </Button>
       </div>
-      <Table
-        columns={D.Data().columns}
-        data={data}
-        actions={D.Actions()}
-      />
+      <Table columns={D.Data().columns} data={data} actions={D.Actions()} />
       {isModalOpen && (
         <Modal
           isOpen={isModalOpen}
           setIsOpen={setIsModalOpen}
           titleModal="Cadastrar Discente"
           fields={[
-            { keyName: 'name', placeholderInput: "Nome" },
-            { keyName: 'registrationNumber', placeholderInput: "Número de Matrícula" },
+            { keyName: "name", placeholderInput: "Nome" },
+            {
+              keyName: "registrationNumber",
+              placeholderInput: "Número de Matrícula",
+            },
           ]}
           buttonSubmit={{
             label: "Cadastrar",
             onDidDismiss: async (data) => {
-              saveData(data)
+              saveData(data);
             },
           }}
         />
