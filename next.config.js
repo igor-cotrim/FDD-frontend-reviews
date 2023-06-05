@@ -14,6 +14,16 @@ const nextConfig = {
       destination: "/pages/teacher/[semester]/[discipline]",
     },
     {
+      source: "/coordenador",
+      destination: "/pages/coordinator",
+    },
+    {
+      source: "/coordenador/formulario",
+      destination: "/pages/coordinator/form",
+    },
+    {
+      source: "/coordenador/formulario/:id",
+      destination: "/pages/coordinator/form/[id]",
       source: "/secretaria",
       destination: "/pages/secretary",
     },
