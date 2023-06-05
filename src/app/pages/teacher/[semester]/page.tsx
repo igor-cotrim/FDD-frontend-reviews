@@ -24,7 +24,7 @@ const Semester = () => {
           }}
         >
           <ArrowLeftIcon className="w-6 h-6 mr-3" />
-          Semestre - {semester}
+          Semestre - {semester?.semester}
         </h1>
       </div>
       <Table
