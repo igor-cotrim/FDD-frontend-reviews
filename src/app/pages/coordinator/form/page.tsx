@@ -1,17 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { PlusIcon } from "@heroicons/react/24/outline";
-
 import { Button, Input, Modal, Table } from "@/components";
-
+import { useModalStore } from "@/store";
 import * as D from "./data";
-import { useDisclosure } from "@/hooks/useDisclosure";
 
 const CoordinatorForm = () => {
-
-  const createQuestionModalHook = useDisclosure()
-  const editQuestionModalHook = useDisclosure()
+  const { toggleVisibility } = useModalStore()
   const data = D.Data()
   const [form, setForm] = useState(data.data)
   const [question, setQuestion] = useState<string>('')
@@ -41,24 +36,14 @@ const CoordinatorForm = () => {
       <Table
         columns={data.columns}
         data={form.questions}
-        actions={D.Actions({ onEdit: editQuestionModalHook.onOpen })}
+        actions={D.Actions({ onEdit: toggleVisibility })}
       />
       <Modal
-        isOpen={createQuestionModalHook.isOpen}
-        setIsOpen={createQuestionModalHook.onClose}
-        buttonSubmit={{
-          label: "Cadastrar",
-          onDidDismiss: (data) => console.log("data: ", data)
-        }}
-        fields={[{ keyName: 'question', placeholderInput: "Pergunta" }]}
-        titleModal="Cadastrar pergunta" />
-      <Modal
-        isOpen={editQuestionModalHook.isOpen}
-        setIsOpen={editQuestionModalHook.onClose}
-        buttonSubmit={{
+        buttons={[{
           label: "Atualizar",
+          type: "submit",
           onDidDismiss: (data) => console.log("data: ", data)
-        }}
+        }]}
         fields={[{ keyName: 'question', placeholderInput: "Pergunta" }]}
         titleModal="Atualizar pergunta"
       />
