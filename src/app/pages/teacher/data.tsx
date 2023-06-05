@@ -42,7 +42,7 @@ export const Actions = () => {
       title="Acessar"
       onClick={() => {
         router.push(`/docente/${row.original.semester}`);
-        setSemester(row.original.semester);
+        setSemester(row.original);
       }}
     />
   );

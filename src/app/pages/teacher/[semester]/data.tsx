@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon, EyeIcon } from "@heroicons/react/24/outline";
 
 import { useTeacherStore } from "@/store";
 import { removeSpacesAndAccents } from "@/utils";
@@ -25,7 +25,7 @@ export const Actions = () => {
       title="Editar"
       onClick={() => {
         router.push(
-          `/docente/${semester}/${removeSpacesAndAccents(
+          `/docente/${semester?.semester}/${removeSpacesAndAccents(
             row.original.discipline
           )}`
         );
@@ -34,5 +34,17 @@ export const Actions = () => {
     />
   );
 
-  return [editAction];
+  const eyeAction = (row: any) => (
+    <EyeIcon
+      className="p-2 text-blue-400 rounded-lg cursor-pointer w-9 h-9"
+      title="Visualizar"
+      onClick={() => ({})}
+    />
+  );
+
+  if (semester?.current) {
+    return [editAction];
+  } else {
+    return [eyeAction];
+  }
 };
