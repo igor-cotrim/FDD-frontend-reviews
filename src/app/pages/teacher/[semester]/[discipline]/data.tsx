@@ -1,10 +1,7 @@
-import {
-  PencilSquareIcon,
-  EyeIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 import { students } from "@/mocks";
+import { useModalStore } from "@/store";
 
 export const Data = () => ({
   data: students,
@@ -21,27 +18,26 @@ export const Data = () => ({
 });
 
 export const Actions = () => {
-  const viewAction = (row: any) => (
-    <EyeIcon
-      className="p-2 text-blue-600 rounded-lg cursor-pointer w-9 h-9"
-      title="Visualizar"
-      onClick={() => console.log(row)}
-    />
-  );
+  const { toggleVisibility } = useModalStore();
+
   const editAction = (row: any) => (
     <PencilSquareIcon
       className="p-2 text-green-600 rounded-lg cursor-pointer w-9 h-9"
       title="Editar"
-      onClick={() => console.log(row)}
+      onClick={() => {
+        toggleVisibility(true, "edit");
+      }}
     />
   );
   const deleteAction = (row: any) => (
     <TrashIcon
       className="p-2 text-red-600 rounded-lg cursor-pointer w-9 h-9"
       title="Deletar"
-      onClick={() => console.log(row)}
+      onClick={() => {
+        toggleVisibility(true, "delete");
+      }}
     />
   );
 
-  return [viewAction, editAction, deleteAction];
+  return [editAction, deleteAction];
 };

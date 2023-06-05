@@ -1,9 +1,11 @@
 import { create } from "zustand";
 
+import { teacherSemesterModel } from "@/models";
+
 type ITeacher = {
-  semester: string | null;
+  semester: teacherSemesterModel | null;
   discipline: string | null;
-  setSemester: (semester?: string) => void;
+  setSemester: (semester?: teacherSemesterModel) => void;
   setDiscipline: (discipline?: string) => void;
 };
 
