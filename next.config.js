@@ -24,6 +24,8 @@ const nextConfig = {
     {
       source: "/coordenador/formulario/:id",
       destination: "/pages/coordinator/form/[id]",
+    },
+    {
       source: "/secretaria",
       destination: "/pages/secretary",
     },
