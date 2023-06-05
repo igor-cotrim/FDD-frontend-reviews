@@ -6,7 +6,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
+import { students } from "@/mocks";
+
 export const Data = () => ({
+  data: students,
   columns: [
     {
       Header: "Id",

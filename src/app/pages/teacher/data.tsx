@@ -1,44 +1,11 @@
 import { useRouter } from "next/navigation";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
+import { useTeacherStore } from "@/store";
+import { semesters } from "@/mocks";
+
 export const Data = () => ({
-  data: [
-    {
-      semester: "2023.1",
-      date: "13/05/2023 - 15/05/2023",
-      status: "Atual",
-    },
-    {
-      semester: "2022.2",
-      date: "13/05/2023 - 15/05/2023",
-      status: "Anterior",
-    },
-    {
-      semester: "2022.2",
-      date: "13/05/2023 - 15/05/2023",
-      status: "Anterior",
-    },
-    {
-      semester: "2022.2",
-      date: "13/05/2023 - 15/05/2023",
-      status: "Anterior",
-    },
-    {
-      semester: "2022.2",
-      date: "13/05/2023 - 15/05/2023",
-      status: "Anterior",
-    },
-    {
-      semester: "2022.2",
-      date: "13/05/2023 - 15/05/2023",
-      status: "Anterior",
-    },
-    {
-      semester: "2022.2",
-      date: "13/05/2023 - 15/05/2023",
-      status: "Anterior",
-    },
-  ],
+  data: semesters,
   columns: [
     {
       Header: "Semestre",
@@ -50,15 +17,15 @@ export const Data = () => ({
     },
     {
       Header: "Status",
-      accessor: "status",
-      Cell: ({ value }: any) =>
-        value === "Atual" ? (
+      accessor: "current",
+      Cell: ({ value }: { value: boolean }) =>
+        value ? (
           <div className="flex items-center justify-center w-full text-sm text-green-800 bg-green-200 rounded-xl">
-            {value}
+            Atual
           </div>
         ) : (
           <div className="flex items-center justify-center w-full text-sm text-red-800 bg-red-200 rounded-xl">
-            {value}
+            Anterior
           </div>
         ),
     },
@@ -67,12 +34,16 @@ export const Data = () => ({
 
 export const Actions = () => {
   const router = useRouter();
+  const { setSemester } = useTeacherStore();
 
   const editAction = (row: any) => (
     <PencilSquareIcon
       className="p-2 rounded-lg cursor-pointer text-primary w-9 h-9"
-      title="Editar"
-      onClick={() => router.push(`/docente/${row.original.semester}`)}
+      title="Acessar"
+      onClick={() => {
+        router.push(`/docente/${row.original.semester}`);
+        setSemester(row.original.semester);
+      }}
     />
   );
 

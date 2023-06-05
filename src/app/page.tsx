@@ -43,8 +43,11 @@ const SignIn = () => {
             }
             value={formData.password}
           />
-
-          <Button type="submit">Acessar</Button>
+          <div className="flex items-center justify-center">
+            <Button className="mt-2" type="submit">
+              Acessar
+            </Button>
+          </div>
         </form>
       </div>
     </div>
