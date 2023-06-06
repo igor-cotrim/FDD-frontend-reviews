@@ -11,7 +11,14 @@ import * as D from "./data";
 
 const Discipline = () => {
   const router = useRouter();
-  const { discipline, setDiscipline } = useTeacherStore();
+  const {
+    discipline,
+    setDiscipline,
+    selectedStudent,
+    deleteStudent,
+    addAmbience,
+    editStudent,
+  } = useTeacherStore();
   const { toggleVisibility, modalType } = useModalStore();
 
   return (
@@ -46,7 +53,7 @@ const Discipline = () => {
 
       {modalType === "form" && (
         <ModalForm
-          onSubmit={() => ({})}
+          onSubmit={(values) => addAmbience(values)}
           title="Cadastrar Discente"
           fields={[
             { label: "Nome", name: "name", type: "text" },
@@ -57,11 +64,20 @@ const Discipline = () => {
 
       {modalType === "edit" && (
         <ModalForm
-          onSubmit={() => ({})}
+          onSubmit={(values) => editStudent(selectedStudent?.id!, values)}
           title="Editar Discente"
+          value={selectedStudent}
           fields={[
-            { label: "Nome", name: "name", type: "text" },
-            { label: "Matrícula", name: "registrationNumber", type: "number" },
+            {
+              label: "Nome",
+              name: "name",
+              type: "text",
+            },
+            {
+              label: "Matrícula",
+              name: "registrationNumber",
+              type: "number",
+            },
           ]}
         />
       )}
@@ -70,7 +86,7 @@ const Discipline = () => {
         <ModalDelete
           title="Deseja realmente deletar o Discente?"
           description="Ao fazer isso o discente será deletado. Tem certeza que deseja deleta-lo?"
-          action={() => ({})}
+          action={() => deleteStudent(selectedStudent?.id!)}
         />
       )}
     </div>

@@ -12,7 +12,6 @@ import ModalContainer from "./ModalContainer";
 type Field = {
   name: string;
   label: string;
-  value?: string;
   placeholder?: string;
   type: HTMLInputTypeAttribute;
 };
@@ -20,23 +19,13 @@ type Field = {
 type ModalFormProps = {
   title: string;
   fields: Field[];
-  onSubmit: () => void;
+  value?: any;
+  onSubmit: (values: any) => void;
 };
 
-const ModalForm = ({ title, fields, onSubmit }: ModalFormProps) => {
-  const [valueField, setValueField] = useState({} as any);
+const ModalForm = ({ title, fields, value, onSubmit }: ModalFormProps) => {
+  const [valueField, setValueField] = useState(value || ({} as any));
   const { toggleVisibility } = useModalStore();
-
-  const updateFieldValue = (
-    keyName: string,
-    arg: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = arg.target.value;
-    setValueField((oldValue: any) => ({
-      ...oldValue,
-      [keyName]: value,
-    }));
-  };
 
   return (
     <ModalContainer>
@@ -62,8 +51,13 @@ const ModalForm = ({ title, fields, onSubmit }: ModalFormProps) => {
                     name={field.name}
                     id={field.name}
                     placeholder={field.placeholder}
-                    // onChange={(arg) => updateFieldValue(field.name, arg)}
-                    value={field.value}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setValueField((prev: any) => ({
+                        ...prev,
+                        [field.name]: e.target.value,
+                      }))
+                    }
+                    value={valueField[field?.name]}
                   />
                 ))}
               </div>
@@ -77,7 +71,7 @@ const ModalForm = ({ title, fields, onSubmit }: ModalFormProps) => {
           className="w-[80%] px-4 py-2 border border-transparent rounded-md shadow-sm sm:w-auto sm:text-sm"
           onClick={() => {
             toggleVisibility(false);
-            onSubmit();
+            onSubmit(valueField);
           }}
         >
           Salvar

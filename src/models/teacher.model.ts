@@ -9,6 +9,7 @@ export type teacherDisciplineModel = {
 };
 
 export type teacherStudentModel = {
+  id: number;
   name: string;
-  code: number;
+  registrationNumber: number;
 };
