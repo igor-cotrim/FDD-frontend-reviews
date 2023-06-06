@@ -4,14 +4,20 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-import { Button, Table } from "@/components";
+import { useModalStore, useSecretaryStore } from "@/store";
+import { Button, ModalDelete, ModalForm, Table } from "@/components";
 
 import * as D from "./data";
-import { useModalStore } from "@/store";
 
-const Teacher = () => {
+const Disciplines = () => {
   const router = useRouter();
-  const { toggleVisibility } = useModalStore();
+  const { toggleVisibility, modalType } = useModalStore();
+  const {
+    addDiscipline,
+    editDiscipline,
+    deleteDiscipline,
+    selectedDiscipline,
+  } = useSecretaryStore();
 
   return (
     <div className="pt-12">
@@ -25,7 +31,7 @@ const Teacher = () => {
         </h1>
         <Button
           type="button"
-          className="max-w-[12rem]"
+          className="max-w-[12rem] p-2"
           onClick={() => {
             toggleVisibility(true, "form");
           }}
@@ -39,8 +45,39 @@ const Teacher = () => {
         data={D.Data().data}
         actions={D.Actions()}
       />
+
+      {modalType === "form" && (
+        <ModalForm
+          onSubmit={(values) => addDiscipline(values)}
+          title="Cadastrar Disciplina"
+          fields={[
+            { label: "Nome", name: "name", type: "text" },
+            { label: "Carga horária", name: "workload", type: "number" },
+          ]}
+        />
+      )}
+
+      {modalType === "edit" && (
+        <ModalForm
+          onSubmit={(values) => editDiscipline(selectedDiscipline?.id!, values)}
+          title="Editar Discente"
+          value={selectedDiscipline}
+          fields={[
+            { label: "Nome", name: "name", type: "text" },
+            { label: "Carga horária", name: "workload", type: "number" },
+          ]}
+        />
+      )}
+
+      {modalType === "delete" && (
+        <ModalDelete
+          title="Deseja realmente deletar a Disciplina?"
+          description="Ao fazer isso a disciplina será deletada. Tem certeza que deseja deleta-lo?"
+          action={() => deleteDiscipline(selectedDiscipline?.id!)}
+        />
+      )}
     </div>
   );
 };
 
-export default Teacher;
+export default Disciplines;

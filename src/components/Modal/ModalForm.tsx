@@ -1,13 +1,11 @@
 "use client";
 
-import { HTMLInputTypeAttribute, useState } from "react";
+import { HTMLInputTypeAttribute, useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { useModalStore } from "@/store";
-import { Button, Input } from "@/components";
-
-import ModalContainer from "./ModalContainer";
+import { Button, Input, ModalContainer } from "@/components";
 
 type Field = {
   name: string;
@@ -26,6 +24,12 @@ type ModalFormProps = {
 const ModalForm = ({ title, fields, value, onSubmit }: ModalFormProps) => {
   const [valueField, setValueField] = useState(value || ({} as any));
   const { toggleVisibility } = useModalStore();
+
+  useEffect(() => {
+    if (value) {
+      setValueField(value);
+    }
+  }, [value]);
 
   return (
     <ModalContainer>
@@ -54,7 +58,7 @@ const ModalForm = ({ title, fields, value, onSubmit }: ModalFormProps) => {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setValueField((prev: any) => ({
                         ...prev,
-                        [field.name]: e.target.value,
+                        [field?.name]: e.target.value,
                       }))
                     }
                     value={valueField[field?.name]}

@@ -4,14 +4,16 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-import { Button, Table } from "@/components";
+import { useModalStore, useSecretaryStore } from "@/store";
+import { Button, ModalDelete, ModalForm, Table } from "@/components";
 
 import * as D from "./data";
-import { useModalStore } from "@/store";
 
-const Teacher = () => {
+const Teachers = () => {
   const router = useRouter();
-  const { toggleVisibility } = useModalStore();
+  const { toggleVisibility, modalType } = useModalStore();
+  const { addTeacher, editTeacher, deleteTeacher, selectedTeacher } =
+    useSecretaryStore();
 
   return (
     <div className="pt-12">
@@ -25,10 +27,8 @@ const Teacher = () => {
         </h1>
         <Button
           type="button"
-          className="max-w-[12rem]"
-          onClick={() => {
-            toggleVisibility(true, "form");
-          }}
+          className="max-w-[12rem] p-2"
+          onClick={() => toggleVisibility(true, "form")}
         >
           <PlusIcon className="w-6 h-6" />
           Adicionar docente
@@ -39,8 +39,51 @@ const Teacher = () => {
         data={D.Data().data}
         actions={D.Actions()}
       />
+
+      {modalType === "form" && (
+        <ModalForm
+          onSubmit={(values) => addTeacher(values)}
+          title="Cadastrar Docente"
+          fields={[
+            { label: "Nome", name: "name", type: "text" },
+            { label: "Siap", name: "siap", type: "number" },
+            {
+              label: "É Coordenador?",
+              name: "isCoordinator",
+              type: "checkbox",
+            },
+            { label: "Senha", name: "password", type: "password" },
+          ]}
+        />
+      )}
+
+      {modalType === "edit" && (
+        <ModalForm
+          onSubmit={(values) => editTeacher(selectedTeacher?.id!, values)}
+          title="Editar Docente"
+          value={selectedTeacher}
+          fields={[
+            { label: "Nome", name: "name", type: "text" },
+            { label: "Siap", name: "siap", type: "number" },
+            {
+              label: "É Coordenador?",
+              name: "isCoordinator",
+              type: "checkbox",
+            },
+            { label: "Senha", name: "password", type: "password" },
+          ]}
+        />
+      )}
+
+      {modalType === "delete" && (
+        <ModalDelete
+          title="Deseja realmente deletar o Docente?"
+          description="Ao fazer isso o docente será deletado. Tem certeza que deseja deleta-lo?"
+          action={() => deleteTeacher(selectedTeacher?.id!)}
+        />
+      )}
     </div>
   );
 };
 
-export default Teacher;
+export default Teachers;
