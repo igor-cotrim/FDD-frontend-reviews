@@ -45,6 +45,18 @@ const nextConfig = {
       source: "/secretaria/semestres",
       destination: "/pages/secretary/semesters",
     },
+    {
+      source: "/discente",
+      destination: "/pages/student",
+    },
+    {
+      source: "/discente/:semestre",
+      destination: "/pages/student/[semester]",
+    },
+    {
+      source: "/discente/:semestre/:disciplina",
+      destination: "/pages/student/[semester]/[discipline]",
+    },
   ],
 };
 
