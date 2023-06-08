@@ -5,7 +5,6 @@ import React from "react";
 import { Table } from "@/components";
 
 import * as D from "./data";
-import {StudentData} from "./data";
 
 const Student = () => {
     return (
