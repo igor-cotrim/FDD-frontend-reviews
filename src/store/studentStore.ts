@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
-import {studentSemesterModel, teacherSemesterModel} from "@/models";
+import {studentSemesterModel} from "@/models";
 
 type IStudent = {
-    semester: teacherSemesterModel | null;
+    semester: studentSemesterModel | null;
     setSemester: (semester?: studentSemesterModel) => void;
 };
 
