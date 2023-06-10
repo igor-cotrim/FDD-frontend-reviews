@@ -10,20 +10,20 @@ export class Api {
     });
   }
 
-  async get<T = any>(endpoint: string, params?: Record<string, string | number>) {
+  async get<T = unknown>(endpoint: string, params?: Record<string, string | number>) {
     const { data } = await this.api.get<T>(endpoint, { params });
     return data
   }
 
-  async post<T = any>(endpoint: string, body: Record<string, string | number>) {
+  async post<T = unknown>(endpoint: string, body: Record<string, any>) {
     return await this.api.post<T>(endpoint, body);
   }
 
-  async put<T = any>(endpoint: string, body: Record<string, string | number>) {
+  async put<T = unknown>(endpoint: string, body: Record<string, any>) {
     return await this.api.put<T>(endpoint, body);
   }
 
-  async delete<T = any>(endpoint: string, params?: any) {
+  async delete<T = unknown>(endpoint: string, params?: Record<string, string | number>) {
     return await this.api.delete<T>(endpoint, { params });
   }
 }
