@@ -25,6 +25,26 @@ const nextConfig = {
       source: "/coordenador/formulario/:id",
       destination: "/pages/coordinator/[form]",
     },
+    {
+      source: "/secretaria",
+      destination: "/pages/secretary",
+    },
+    {
+      source: "/secretaria/docentes",
+      destination: "/pages/secretary/teachers",
+    },
+    {
+      source: "/secretaria/discentes",
+      destination: "/pages/secretary/students",
+    },
+    {
+      source: "/secretaria/disciplinas",
+      destination: "/pages/secretary/disciplines",
+    },
+    {
+      source: "/secretaria/semestres",
+      destination: "/pages/secretary/semesters",
+    },
   ],
 };
 

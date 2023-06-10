@@ -1,20 +1,25 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 
-import { useModalStore, useTeacherStore } from "@/store";
+import { useModalStore, useSecretaryStore } from "@/store";
 
 export const Data = () => {
-  const { students } = useTeacherStore();
+  const { disciplines } = useSecretaryStore();
 
   return {
-    data: students,
+    data: disciplines,
     columns: [
       {
         Header: "Nome",
         accessor: "name",
       },
       {
-        Header: "Numero de matrícula",
-        accessor: "registrationNumber",
+        Header: "Carga horária",
+        accessor: "workload",
+        Cell: ({ value }: { value: number }) => (
+          <div className="flex items-center justify-center w-full">
+            {value} horas
+          </div>
+        ),
       },
     ],
   };
@@ -22,14 +27,14 @@ export const Data = () => {
 
 export const Actions = () => {
   const { toggleVisibility } = useModalStore();
-  const { selectStudent } = useTeacherStore();
+  const { selectDiscipline } = useSecretaryStore();
 
   const editAction = (row: any) => (
     <PencilSquareIcon
-      className="p-2 text-green-600 rounded-lg cursor-pointer w-9 h-9"
-      title="Editar"
+      className="p-2 text-blue-500 rounded-lg cursor-pointer w-9 h-9"
+      title="Acessar"
       onClick={() => {
-        selectStudent(row.original.id);
+        selectDiscipline(row.original.id);
         toggleVisibility(true, "edit");
       }}
     />
@@ -39,7 +44,7 @@ export const Actions = () => {
       className="p-2 text-red-600 rounded-lg cursor-pointer w-9 h-9"
       title="Deletar"
       onClick={() => {
-        selectStudent(row.original.id);
+        selectDiscipline(row.original.id);
         toggleVisibility(true, "delete");
       }}
     />
