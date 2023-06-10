@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Input, Modal, Table } from "@/components";
+import { Button, Input, Table, ModalForm } from "@/components";
 import { useModalStore } from "@/store";
 import * as D from "./data";
 import { useRouter } from "next/navigation";
@@ -70,26 +70,27 @@ const CoordinatorForm = () => {
           },
         })}
       />
-      <Modal
-        buttons={[
+      <ModalForm
+        onSubmit={(data) => {
+          setForm((oldValue) => ({
+            title: oldValue.title,
+            questions: oldValue.questions.map((question) => {
+              if (question.title === editQuestion) {
+                return { title: data.question };
+              }
+              return question;
+            }),
+          }));
+        }}
+        fields={[
           {
-            label: "Atualizar",
-            type: "submit",
-            onDidDismiss: (data) => {
-              setForm((oldValue) => ({
-                title: oldValue.title,
-                questions: oldValue.questions.map((question) => {
-                  if (question.title === editQuestion) {
-                    return { title: data.question };
-                  }
-                  return question;
-                }),
-              }));
-            },
+            label: "Questão",
+            name: "question",
+            type: "text",
+            placeholder: "Pergunta",
           },
         ]}
-        fields={[{ keyName: "question", placeholderInput: "Pergunta" }]}
-        titleModal="Atualizar pergunta"
+        title="Atualizar pergunta"
       />
     </div>
   );
