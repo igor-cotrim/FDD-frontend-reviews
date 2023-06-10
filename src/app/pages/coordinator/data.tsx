@@ -4,25 +4,10 @@ import {
   TrashIcon,
   ClipboardIcon,
 } from "@heroicons/react/24/outline";
+import { coordinatorDataForms } from "@/mocks";
 
 export const Data = () => ({
-  data: [
-    {
-      name: "Disciplina - Programação Web",
-      createdAt: "25/05/2023",
-      totalQuestions: 10,
-    },
-    {
-      name: "Disciplina - Programação Mobile",
-      createdAt: "20/05/2023",
-      totalQuestions: 12,
-    },
-    {
-      name: "Disciplina - Frameworks de Desenvolvimento",
-      createdAt: "21/05/2023",
-      totalQuestions: 8,
-    },
-  ],
+  data: coordinatorDataForms,
   columns: [
     {
       Header: "Nome",
@@ -40,31 +25,33 @@ export const Data = () => ({
 });
 
 type ActionProps = {
-  onEdit?: (row: any) => void;
-  onDelete?: (row: any) => void;
-  onCopy?: (row: any) => void;
-}
+  onEdit: (row: any) => void;
+  onDelete: (row: any) => void;
+  onCopy: (row: any) => void;
+};
 
 export const Actions = (props: ActionProps) => {
-  const editAction = (row: any) => (
+  const editAction = ({ original }: any) => (
     <PencilSquareIcon
       className="p-2 rounded-lg cursor-pointer text-primary w-9 h-9"
       title="Editar"
-      onClick={props.onEdit}
+      onClick={() => props.onEdit(original)}
     />
   );
 
-  const deleteAction = (row: any) => (
+  const deleteAction = ({ original }: any) => (
     <TrashIcon
       className="p-2 rounded-lg cursor-pointer text-primary w-9 h-9"
       title="Excluir"
+      onClick={() => props.onDelete(original)}
     />
   );
 
-  const copyAction = (row: any) => (
+  const copyAction = ({ original }: any) => (
     <ClipboardIcon
       className="p-2 rounded-lg cursor-pointer text-primary w-9 h-9"
       title="Copiar"
+      onClick={() => props.onCopy(original)}
     />
   );
 
