@@ -2,10 +2,10 @@ import { useRouter } from "next/navigation";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 import { useStudentStore } from "@/store";
-import { semesters } from "@/mocks";
+import { studentSemesters } from "@/mocks";
 
 export const StudentData = () => ({
-    data: semesters,
+    data: studentSemesters,
     columns: [
         {
             Header: "Semestre",

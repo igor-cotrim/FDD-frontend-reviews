@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 import {studentSemesterModel, testStudentModel} from "@/models";
-import {tests} from "@/mocks/studentMock";
+import {tests} from "@/mocks";
 
 type IStudent = {
     semester: studentSemesterModel | null;

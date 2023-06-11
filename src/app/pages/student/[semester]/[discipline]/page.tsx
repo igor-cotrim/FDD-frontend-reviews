@@ -2,10 +2,10 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-import {useModalStore, useStudentStore, useTeacherStore} from "@/store";
-import { Button, Table, ModalDelete, ModalForm } from "@/components";
+import {useModalStore, useStudentStore} from "@/store";
+import {Table, ModalDelete, ModalForm } from "@/components";
 
 import * as D from "./data";
 
@@ -18,7 +18,7 @@ const Discipline = () => {
         deleteTest,
         editTest,
     } = useStudentStore();
-    const { toggleVisibility, modalType } = useModalStore();
+    const {modalType } = useModalStore();
 
     return (
         <div className="pt-12">
@@ -53,7 +53,7 @@ const Discipline = () => {
                         },
                         {
                             label: "Status",
-                            name: "testStatus",
+                            name: "registrationNumber",
                             type: "number",
                         },
                     ]}
