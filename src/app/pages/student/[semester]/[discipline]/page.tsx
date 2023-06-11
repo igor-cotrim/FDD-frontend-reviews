@@ -43,14 +43,9 @@ const Discipline = () => {
             {modalType === "edit" && (
                 <ModalForm
                     onSubmit={(values) => editTest(selectedTest?.id!, values)}
-                    title="Editar Discente"
+                    title={`${selectedTest?.question}`}
                     value={selectedTest}
                     fields={[
-                        {
-                            label: "Avaliacoes",
-                            name: "question",
-                            type: "text",
-                        },
                         {
                             label: "Status",
                             name: "registrationNumber",
