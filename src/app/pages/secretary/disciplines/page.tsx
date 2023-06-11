@@ -4,35 +4,30 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-import { useModalStore, useTeacherStore } from "@/store";
-import { Button, Table, ModalDelete, ModalForm } from "@/components";
+import { useModalStore, useSecretaryStore } from "@/store";
+import { Button, ModalDelete, ModalForm, Table } from "@/components";
 
 import * as D from "./data";
 
-const Discipline = () => {
+const Disciplines = () => {
   const router = useRouter();
-  const {
-    discipline,
-    setDiscipline,
-    selectedStudent,
-    deleteStudent,
-    addAmbience,
-    editStudent,
-  } = useTeacherStore();
   const { toggleVisibility, modalType } = useModalStore();
+  const {
+    addDiscipline,
+    editDiscipline,
+    deleteDiscipline,
+    selectedDiscipline,
+  } = useSecretaryStore();
 
   return (
     <div className="pt-12">
       <div className="flex items-center justify-between mb-4">
         <h1
           className="flex items-center font-mono text-3xl font-semibold cursor-pointer text-primary"
-          onClick={() => {
-            router.back();
-            setDiscipline();
-          }}
+          onClick={() => router.back()}
         >
           <ArrowLeftIcon className="w-6 h-6 mr-3" />
-          {discipline}
+          Disciplinas
         </h1>
         <Button
           type="button"
@@ -42,7 +37,7 @@ const Discipline = () => {
           }}
         >
           <PlusIcon className="w-6 h-6" />
-          Adicionar discente
+          Adicionar disciplina
         </Button>
       </div>
       <Table
@@ -53,44 +48,36 @@ const Discipline = () => {
 
       {modalType === "form" && (
         <ModalForm
-          onSubmit={(values) => addAmbience(values)}
-          title="Cadastrar Discente"
+          onSubmit={(values) => addDiscipline(values)}
+          title="Cadastrar Disciplina"
           fields={[
             { label: "Nome", name: "name", type: "text" },
-            { label: "Matrícula", name: "registrationNumber", type: "number" },
+            { label: "Carga horária", name: "workload", type: "number" },
           ]}
         />
       )}
 
       {modalType === "edit" && (
         <ModalForm
-          onSubmit={(values) => editStudent(selectedStudent?.id!, values)}
+          onSubmit={(values) => editDiscipline(selectedDiscipline?.id!, values)}
           title="Editar Discente"
-          value={selectedStudent}
+          value={selectedDiscipline}
           fields={[
-            {
-              label: "Nome",
-              name: "name",
-              type: "text",
-            },
-            {
-              label: "Matrícula",
-              name: "registrationNumber",
-              type: "number",
-            },
+            { label: "Nome", name: "name", type: "text" },
+            { label: "Carga horária", name: "workload", type: "number" },
           ]}
         />
       )}
 
       {modalType === "delete" && (
         <ModalDelete
-          title="Deseja realmente deletar o Discente?"
-          description="Ao fazer isso o discente será deletado. Tem certeza que deseja deleta-lo?"
-          action={() => deleteStudent(selectedStudent?.id!)}
+          title="Deseja realmente deletar a Disciplina?"
+          description="Ao fazer isso a disciplina será deletada. Tem certeza que deseja deleta-lo?"
+          action={() => deleteDiscipline(selectedDiscipline?.id!)}
         />
       )}
     </div>
   );
 };
 
-export default Discipline;
+export default Disciplines;

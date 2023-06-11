@@ -4,42 +4,31 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-import { useModalStore, useTeacherStore } from "@/store";
-import { Button, Table, ModalDelete, ModalForm } from "@/components";
+import { useModalStore, useSecretaryStore } from "@/store";
+import { Button, ModalDelete, ModalForm, Table } from "@/components";
 
 import * as D from "./data";
 
-const Discipline = () => {
+const Students = () => {
   const router = useRouter();
-  const {
-    discipline,
-    setDiscipline,
-    selectedStudent,
-    deleteStudent,
-    addAmbience,
-    editStudent,
-  } = useTeacherStore();
   const { toggleVisibility, modalType } = useModalStore();
+  const { addStudent, editStudent, deleteStudent, selectedStudent } =
+    useSecretaryStore();
 
   return (
     <div className="pt-12">
       <div className="flex items-center justify-between mb-4">
         <h1
           className="flex items-center font-mono text-3xl font-semibold cursor-pointer text-primary"
-          onClick={() => {
-            router.back();
-            setDiscipline();
-          }}
+          onClick={() => router.back()}
         >
           <ArrowLeftIcon className="w-6 h-6 mr-3" />
-          {discipline}
+          Discentes
         </h1>
         <Button
           type="button"
           className="max-w-[12rem] p-2"
-          onClick={() => {
-            toggleVisibility(true, "form");
-          }}
+          onClick={() => toggleVisibility(true, "form")}
         >
           <PlusIcon className="w-6 h-6" />
           Adicionar discente
@@ -53,11 +42,16 @@ const Discipline = () => {
 
       {modalType === "form" && (
         <ModalForm
-          onSubmit={(values) => addAmbience(values)}
+          onSubmit={(values) => addStudent(values)}
           title="Cadastrar Discente"
           fields={[
             { label: "Nome", name: "name", type: "text" },
-            { label: "Matrícula", name: "registrationNumber", type: "number" },
+            {
+              label: "Número de matrícula",
+              name: "registrationNumber",
+              type: "number",
+            },
+            { label: "Senha", name: "password", type: "password" },
           ]}
         />
       )}
@@ -68,16 +62,13 @@ const Discipline = () => {
           title="Editar Discente"
           value={selectedStudent}
           fields={[
+            { label: "Nome", name: "name", type: "text" },
             {
-              label: "Nome",
-              name: "name",
-              type: "text",
-            },
-            {
-              label: "Matrícula",
+              label: "Número de matrícula",
               name: "registrationNumber",
               type: "number",
             },
+            { label: "Senha", name: "password", type: "password" },
           ]}
         />
       )}
@@ -93,4 +84,4 @@ const Discipline = () => {
   );
 };
 
-export default Discipline;
+export default Students;

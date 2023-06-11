@@ -1,8 +1,4 @@
-import {
-  ChangeEventHandler,
-  HTMLInputTypeAttribute,
-  InputHTMLAttributes,
-} from "react";
+import { HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
 
 type InputTypes = InputHTMLAttributes<HTMLInputElement>;
 
@@ -11,7 +7,6 @@ type InputProps = {
   name: string;
   placeholder?: string;
   value?: string | number | Date;
-  onChange?: ChangeEventHandler | undefined;
   type: HTMLInputTypeAttribute;
 } & InputTypes;
 
@@ -32,12 +27,12 @@ const Input = ({
       >
         {label}
       </label>
-      <div className="w-full mt-1 mb-1 border border-gray-200 rounded-md shadow-sm">
+      <div className="w-full mt-1 mb-1 border border-gray-200 rounded-md shadow-sm ">
         <input
           type={type}
           name={name}
           id={name}
-          className="block w-full p-2 sm:text-sm disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-50"
+          className="block w-[100%] p-2 sm:text-sm disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-50"
           placeholder={placeholder}
           value={value}
           onChange={onChange}
