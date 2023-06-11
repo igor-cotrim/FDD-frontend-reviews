@@ -4,14 +4,14 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-import { useTeacherStore } from "@/store";
+import { useStudentStore } from "@/store";
 import { Table } from "@/components";
 
 import * as D from "./data";
 
 const Semester = () => {
     const router = useRouter();
-    const { semester, setSemester } = useTeacherStore();
+    const { semester, setSemester } = useStudentStore();
 
     return (
         <div className="pt-12">

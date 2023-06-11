@@ -4,12 +4,8 @@ export type studentSemesterModel = {
     current: boolean;
 };
 
-export type studentDisciplineModel = {
-    discipline: string;
-};
-
-export type studentStudentModel = {
+export type testStudentModel = {
     id: number;
-    name: string;
+    question: string;
     registrationNumber: number;
 };

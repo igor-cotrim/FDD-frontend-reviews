@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { PencilSquareIcon, EyeIcon } from "@heroicons/react/24/outline";
 
-import { useTeacherStore } from "@/store";
+import { useStudentStore } from "@/store";
 import { removeSpacesAndAccents } from "@/utils";
 import { disciplines } from "@/mocks";
 
@@ -17,7 +17,7 @@ export const Data = () => ({
 
 export const Actions = () => {
     const router = useRouter();
-    const { semester, setDiscipline } = useTeacherStore();
+    const { semester, setDiscipline } = useStudentStore();
 
     const editAction = (row: any) => (
         <PencilSquareIcon

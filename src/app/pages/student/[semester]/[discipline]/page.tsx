@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-import { useModalStore, useTeacherStore } from "@/store";
+import {useModalStore, useStudentStore, useTeacherStore} from "@/store";
 import { Button, Table, ModalDelete, ModalForm } from "@/components";
 
 import * as D from "./data";
@@ -14,11 +14,10 @@ const Discipline = () => {
     const {
         discipline,
         setDiscipline,
-        selectedStudent,
-        deleteStudent,
-        addAmbience,
-        editStudent,
-    } = useTeacherStore();
+        selectedTest,
+        deleteTest,
+        editTest,
+    } = useStudentStore();
     const { toggleVisibility, modalType } = useModalStore();
 
     return (
@@ -34,16 +33,6 @@ const Discipline = () => {
                     <ArrowLeftIcon className="w-6 h-6 mr-3" />
                     {discipline}
                 </h1>
-                <Button
-                    type="button"
-                    className="max-w-[12rem] p-2"
-                    onClick={() => {
-                        toggleVisibility(true, "form");
-                    }}
-                >
-                    <PlusIcon className="w-6 h-6" />
-                    Adicionar discente
-                </Button>
             </div>
             <Table
                 columns={D.Data().columns}
@@ -51,22 +40,11 @@ const Discipline = () => {
                 actions={D.Actions()}
             />
 
-            {modalType === "form" && (
-                <ModalForm
-                    onSubmit={(values) => addAmbience(values)}
-                    title="Avalia professor"
-                    fields={[
-                        { label: "Nome", name: "name", type: "text" },
-                        { label: "Matrícula", name: "registrationNumber", type: "number" },
-                    ]}
-                />
-            )}
-
             {modalType === "edit" && (
                 <ModalForm
-                    onSubmit={(values) => editStudent(selectedStudent?.id!, values)}
+                    onSubmit={(values) => editTest(selectedTest?.id!, values)}
                     title="Editar Discente"
-                    value={selectedStudent}
+                    value={selectedTest}
                     fields={[
                         {
                             label: "Avaliacoes",
@@ -86,7 +64,7 @@ const Discipline = () => {
                 <ModalDelete
                     title="Deseja realmente cancelar a Avaliacao?"
                     description="Ao fazer isso a avaliacao será deletada. Tem certeza que deseja deleta-lo?"
-                    action={() => deleteStudent(selectedStudent?.id!)}
+                    action={() => deleteTest(selectedTest?.id!)}
                 />
             )}
         </div>
