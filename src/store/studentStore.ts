@@ -23,7 +23,7 @@ export const useStudentStore = create<IStudent>((set,get) => ({
     selectTest: (id) => {
         const tests = get().tests;
         const selectedTest =
-            tests.find((student) => student.id === id) || null;
+            tests.find((selectedTest) => selectedTest.id === id) || null;
 
         set({ selectedTest: !!id ? selectedTest : null });
     },

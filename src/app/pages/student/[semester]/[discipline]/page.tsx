@@ -48,7 +48,7 @@ const Discipline = () => {
                     fields={[
                         {
                             label: "Avaliacoes",
-                            name: "test",
+                            name: "question",
                             type: "text",
                         },
                         {
