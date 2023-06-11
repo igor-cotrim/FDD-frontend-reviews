@@ -23,7 +23,7 @@ const nextConfig = {
     },
     {
       source: "/coordenador/formulario/:id",
-      destination: "/pages/coordinator/form/[id]",
+      destination: "/pages/coordinator/[form]",
     },
     {
       source: "/secretaria",
