@@ -23,7 +23,7 @@ const nextConfig = {
     },
     {
       source: "/coordenador/formulario/:id",
-      destination: "/pages/coordinator/form/[id]",
+      destination: "/pages/coordinator/[form]",
     },
     {
       source: "/secretaria",
@@ -44,6 +44,18 @@ const nextConfig = {
     {
       source: "/secretaria/semestres",
       destination: "/pages/secretary/semesters",
+    },
+    {
+      source: "/discente",
+      destination: "/pages/student",
+    },
+    {
+      source: "/discente/:semestre",
+      destination: "/pages/student/[semester]",
+    },
+    {
+      source: "/discente/:semestre/:disciplina",
+      destination: "/pages/student/[semester]/[discipline]",
     },
   ],
 };
