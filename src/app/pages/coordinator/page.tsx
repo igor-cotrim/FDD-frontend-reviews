@@ -22,7 +22,7 @@ const Coordinator = () => {
         <Button
           onClick={() => router.push("/coordenador/formulario")}
           type="button"
-          className="max-w-xs flex"
+          className="flex max-w-xs p-2"
         >
           <PlusIcon className="w-6 h-6" />
           Adicionar formulário
