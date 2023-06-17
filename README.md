@@ -1,23 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FDD-Reviews
 
-## Getting Started
+Sistemas de reviews para as materias dos professores do IFBA.
 
-First, run the development server:
+## Pré-requisitos
 
+* Node.js
+
+## Instalação
+
+1. Clone o repositório do projeto:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  git clone https://github.com/ifba-vca/reviews-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale as dependências do projeto:
+```bash
+  cd reviews-frontend
+  npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuração
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Entre na raiz do projeto e crie o arquivo .env.local e copie o conteudo do .env.example:
+```bash
+  touch .env.local
+```
 
-## Modulo discente
+## Iniciar
 
-Para acessar o modulo do discente utilize o link http://localhost:3000/discente ou acesse o login com o usuario `discente` e senha `discente`.
+1. Rode o comando para iniciar o projeto:
+
+```bash
+  npm run dev
+```
